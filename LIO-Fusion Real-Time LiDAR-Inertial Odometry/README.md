@@ -3,10 +3,6 @@
 **A real-time lidar-inertial odometry package. We strongly recommend the users read this document thoroughly and test the package with the provided dataset first.**
 
 <p align='center'>
-    <img src="./config/doc/demo.gif" alt="drawing" width="800"/>
-</p>
-
-<p align='center'>
     <img src="./config/doc/device-livox-horizon.png" alt="drawing" width="200"/>
 </p>
 
