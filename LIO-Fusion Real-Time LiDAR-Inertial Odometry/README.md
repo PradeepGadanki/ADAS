@@ -8,8 +8,6 @@
 
 <p align='center'>
     <img src="./config/doc/device-hand-2.png" alt="drawing" width="200"/>
-    <img src="./config/doc/device-hand.png" alt="drawing" width="200"/>
-    <img src="./config/doc/device-jackal.png" alt="drawing" width="200"/>
     <img src="./config/doc/device-livox-horizon.png" alt="drawing" width="200"/>
 </p>
 
