@@ -1,63 +1,49 @@
-# LIO-SAM
+# LIO-Fusion: Real-Time LiDAR-Inertial Odometry
 
-**A real-time lidar-inertial odometry package. We strongly recommend the users read this document thoroughly and test the package with the provided dataset first.**
+**LIO-Fusion** is a real-time LiDAR-inertial odometry package designed for accurate and efficient 3D motion estimation using dual factor graph optimization. It fuses LiDAR point clouds and IMU data to provide robust localization in both structured and unstructured environments.
 
-<p align='center'>
-    <img src="./config/doc/device-livox-horizon.png" alt="drawing" width="200"/>
+<p align="center">
+    <img src="./config/doc/demo.gif" alt="LIO-Fusion Demo" width="800"/>
 </p>
 
-## Menu
+---
 
-  - [**System architecture**](#system-architecture)
+## 📋 Table of Contents
 
-  - [**Package dependency**](#dependency)
+- [System Architecture](#system-architecture)
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [Docker Setup](#docker-setup)
+- [Preparing LiDAR Data](#preparing-lidar-data)
+- [Preparing IMU Data](#preparing-imu-data)
+- [Sample Datasets](#sample-datasets)
+- [Running the Package](#running-the-package)
+- [Other Notes](#other-notes)
+- [Known Issues](#known-issues)
 
-  - [**Package install**](#install)
+---
 
-  - [**Prepare lidar data**](#prepare-lidar-data) (must read)
+## 🧠 System Architecture
 
-  - [**Prepare IMU data**](#prepare-imu-data) (must read)
+The system runs up to **10x faster than real-time** and uses two separate factor graphs:
 
-  - [**Sample datasets**](#sample-datasets)
+- **Graph A** (`mapOptimization.cpp`): Optimizes LiDAR odometry and optional GPS data for global pose refinement.
+- **Graph B** (`imuPreintegration.cpp`): Fuses IMU and LiDAR data, estimates bias, and runs at IMU frequency for low-latency updates.
 
-  - [**Run the package**](#run-the-package)
+---
 
-  - [**Other notes**](#other-notes)
+## 📦 Dependencies
 
-  - [**Issues**](#issues)
+- ROS (tested with Kinetic and Melodic)
+- GTSAM 4.x
 
-  - [**Paper**](#paper)
+### Install ROS packages
 
-  - [**TODO**](#todo)
+```bash
+sudo apt-get install -y ros-kinetic-navigation
+sudo apt-get install -y ros-kinetic-robot-localization
+sudo apt-get install -y ros-kinetic-robot-state-publisher
 
-  - [**Related Package**](#related-package)
-
-  - [**Acknowledgement**](#acknowledgement)
-
-## System architecture
-
-<p align='center'>
-    <img src="./config/doc/system.png" alt="drawing" width="800"/>
-</p>
-
-We design a system that maintains two graphs and runs up to 10x faster than real-time.
-  - The factor graph in "mapOptimization.cpp" optimizes lidar odometry factor and GPS factor. This factor graph is maintained consistently throughout the whole test.
-  - The factor graph in "imuPreintegration.cpp" optimizes IMU and lidar odometry factor and estimates IMU bias. This factor graph is reset periodically and guarantees real-time odometry estimation at IMU frequency.
-
-## Dependency
-
-This is the original ROS1 implementation of LIO-SAM. For a ROS2 implementation see branch `ros2`.
-
-- [ROS](http://wiki.ros.org/ROS/Installation) (tested with Kinetic and Melodic. Refer to [#206](https://github.com/TixiaoShan/LIO-SAM/issues/206) for Noetic)
-  ```
-  sudo apt-get install -y ros-kinetic-navigation
-  sudo apt-get install -y ros-kinetic-robot-localization
-  sudo apt-get install -y ros-kinetic-robot-state-publisher
-  ```
-- [gtsam](https://gtsam.org/get_started/) (Georgia Tech Smoothing and Mapping library)
-  ```
-  sudo add-apt-repository ppa:borglab/gtsam-release-4.0
-  sudo apt install libgtsam-dev libgtsam-unstable-dev
   ```
 
 ## Install
