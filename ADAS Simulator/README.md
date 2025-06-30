@@ -19,7 +19,7 @@ This project simulates a simplified computer vision stack for autonomous vehicle
 ## 🖥️ Tested Environment
 
 ### 💻 Computers
-- **Windows 10 (x64)** with **Visual Studio **
+- **Windows 10 (x64)** with **Visual Studio**
   - Intel Core i7-6700 @ 3.4GHz
   - NVIDIA GeForce GTX 1070
 
